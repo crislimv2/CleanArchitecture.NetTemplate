@@ -7,6 +7,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options,
   private readonly IDomainEventDispatcher? _dispatcher = dispatcher;
 
   public DbSet<Contributor> Contributors => Set<Contributor>();
+  public DbSet<Product> Products => Set<Product>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
