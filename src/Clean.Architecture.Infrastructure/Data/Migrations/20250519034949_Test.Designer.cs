@@ -3,6 +3,7 @@ using System;
 using Clean.Architecture.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Clean.Architecture.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250519034949_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,16 +36,14 @@ namespace Clean.Architecture.Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("name");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer")
-                        .HasColumnName("status");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("contributors");
+                    b.ToTable("Contributors");
                 });
 
             modelBuilder.Entity("Clean.Architecture.Core.ContributorAggregate.Product", b =>
@@ -54,60 +55,48 @@ namespace Clean.Architecture.Infrastructure.Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Barcode")
-                        .HasColumnType("text")
-                        .HasColumnName("barcode");
+                        .HasColumnType("text");
 
                     b.Property<string>("Brand")
-                        .HasColumnType("text")
-                        .HasColumnName("brand");
+                        .HasColumnType("text");
 
                     b.Property<string>("Category")
-                        .HasColumnType("text")
-                        .HasColumnName("category");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("createdAt");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("text")
-                        .HasColumnName("ImageUrl");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("numeric")
-                        .HasColumnName("price");
+                        .HasColumnType("numeric");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("integer")
-                        .HasColumnName("quantity");
+                        .HasColumnType("integer");
 
                     b.Property<string>("SKU")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("sku");
+                        .HasColumnType("text");
 
                     b.Property<string>("UnitOfMeasure")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("unitOfMeasure");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updatedAt");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("products");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Clean.Architecture.Core.ContributorAggregate.Contributor", b =>
@@ -119,21 +108,18 @@ namespace Clean.Architecture.Infrastructure.Data.Migrations
 
                             b1.Property<string>("CountryCode")
                                 .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("country_code");
+                                .HasColumnType("text");
 
                             b1.Property<string>("Extension")
-                                .HasColumnType("text")
-                                .HasColumnName("extension");
+                                .HasColumnType("text");
 
                             b1.Property<string>("Number")
                                 .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("number");
+                                .HasColumnType("text");
 
                             b1.HasKey("ContributorId");
 
-                            b1.ToTable("contributors");
+                            b1.ToTable("Contributors");
 
                             b1.WithOwner()
                                 .HasForeignKey("ContributorId");
