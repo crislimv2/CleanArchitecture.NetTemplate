@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Clean.Architecture.Web.Protos";
+
+package product;
+
+// Service definition
+service ProductService {
+  rpc GetProductById (GetProductRequest) returns (GetProductResponse);
+}
+
+// Messages for GetProductById
+message GetProductRequest {
+  string id = 1;
+}
+
+message GetProductResponse {
+  string id = 1;
+  string name = 2;
+  int32 stock = 3;
+  double price = 4;
+}
+
+// Messages for UpdateStock
+message UpdateStockRequest {
+  string product_id = 1;
+  int32 quantity_change = 2; // contoh: -1 artinya kurangi 1
+}
+
+message UpdateStockResponse {
+  bool success = 1;
+  string message = 2;
+}

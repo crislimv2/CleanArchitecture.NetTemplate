@@ -1,4 +1,5 @@
 ﻿using Clean.Architecture.Web.Configurations;
+using Clean.Architecture.Web.GrpcServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddFastEndpoints()
                 {
                   o.ShortSchemaNames = true;
                 });
+builder.Services.AddGrpc();
 
 #if (aspire)
 builder.AddServiceDefaults();
@@ -30,7 +32,8 @@ builder.AddServiceDefaults();
 var app = builder.Build();
 
 await app.UseAppMiddlewareAndSeedDatabase();
-
+app.MapGrpcService<ProductGrpcService>();
+app.MapGet("/", () => "Use a gRPC client to communicate.");
 app.Run();
 
 // Make the implicit Program.cs class public, so integration tests can reference the correct assembly for host building
