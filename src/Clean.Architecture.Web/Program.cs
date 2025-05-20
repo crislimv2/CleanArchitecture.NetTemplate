@@ -1,5 +1,6 @@
 ﻿using Clean.Architecture.Web.Configurations;
 using Clean.Architecture.Web.GrpcServices;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,14 +24,24 @@ builder.Services.AddFastEndpoints()
                 {
                   o.ShortSchemaNames = true;
                 });
-builder.Services.AddGrpc();
 
 #if (aspire)
 builder.AddServiceDefaults();
 #endif
 
 var app = builder.Build();
+//var redis = app.Services.GetRequiredService<IConnectionMultiplexer>();
+//var db = redis.GetDatabase();
 
+//try
+//{
+//  var pong = await db.PingAsync();
+//  Console.WriteLine($"Redis ping successful: {pong.TotalMilliseconds} ms");
+//}
+//catch (Exception ex)
+//{
+//  Console.WriteLine($"Redis ping failed: {ex.Message}");
+//}
 await app.UseAppMiddlewareAndSeedDatabase();
 app.MapGrpcService<ProductGrpcService>();
 app.MapGet("/", () => "Use a gRPC client to communicate.");

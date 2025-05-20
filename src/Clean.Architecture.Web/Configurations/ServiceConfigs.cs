@@ -1,6 +1,7 @@
 ﻿using Clean.Architecture.Core.Interfaces;
 using Clean.Architecture.Infrastructure;
 using Clean.Architecture.Infrastructure.Email;
+using StackExchange.Redis;
 
 namespace Clean.Architecture.Web.Configurations;
 
@@ -11,6 +12,22 @@ public static class ServiceConfigs
     services.AddInfrastructureServices(builder.Configuration, logger)
             .AddMediatrConfigs();
 
+    // DI
+    // gRpc Service Register
+    builder.Services.AddGrpc();
+
+    services.AddSingleton<ICacheService, RedisCacheService>(); // adjust names accordingly
+
+    // Redis Service Register
+    builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+    {
+      var configuration = builder.Configuration.GetConnectionString("Redis");
+      if (string.IsNullOrEmpty(configuration))
+      {
+        throw new InvalidOperationException("Redis connection string is missing in configuration.");
+      }
+      return ConnectionMultiplexer.Connect(configuration);
+    });
 
     if (builder.Environment.IsDevelopment())
     {
