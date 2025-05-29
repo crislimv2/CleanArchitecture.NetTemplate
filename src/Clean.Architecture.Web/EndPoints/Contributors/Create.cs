@@ -1,6 +1,7 @@
 ﻿using Clean.Architecture.UseCases.Contributors.Create;
+using Clean.Architecture.Web.Contributors;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Clean.Architecture.Web.EndPoints.Contributors;
 
 /// <summary>
 /// Create a new Contributor

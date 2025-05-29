@@ -34,18 +34,40 @@ public class Product : EntityBase, IAggregateRoot
   public DateTime CreatedAt { get; private set; }
   [Column("updatedAt")]
   public DateTime? UpdatedAt { get; private set; }
+  [Column("createdBy")]
+  public string CreatedBy { get; private set; } = string.Empty;
+  [Column("updatedBy")]
+  public string? UpdatedBy { get; private set; }
 
   // Required by EF Core
   protected Product() { }
 
-  public Product(string sku, string name, string description, decimal price, int quantity, string unitOfMeasure)
+  public Product(
+    string sku, 
+    string name, 
+    string? description, 
+    decimal price, 
+    int quantity, 
+    string? imageUrl,
+    string? category,
+    string? brand,
+    string? barcode,
+    string? unitOfMeasure,
+    DateTime createdAt,
+    string createdBy
+    )
   {
     SKU = Guard.Against.NullOrEmpty(sku, nameof(sku));
     Name = Guard.Against.NullOrEmpty(name, nameof(name));
     Description = Guard.Against.NullOrEmpty(description, nameof(description));
     Price = Guard.Against.Negative(price);
     Quantity = Guard.Against.Negative(quantity);
+    ImageUrl = imageUrl;
+    Category = category;
+    Brand = brand;
+    Barcode = barcode;
     UnitOfMeasure = Guard.Against.NullOrEmpty(unitOfMeasure, nameof(unitOfMeasure));
     CreatedAt = DateTime.UtcNow;
+    CreatedBy = Guard.Against.NullOrEmpty(createdBy, nameof(createdBy));
   }
 }

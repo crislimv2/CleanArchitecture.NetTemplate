@@ -1,4 +1,6 @@
-﻿namespace Clean.Architecture.Web.Contributors;
+﻿using Clean.Architecture.Web.EndPoints.Contributors;
+
+namespace Clean.Architecture.Web.Contributors;
 
 public class ContributorListResponse
 {

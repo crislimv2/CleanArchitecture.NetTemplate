@@ -1,7 +1,8 @@
 ﻿using Clean.Architecture.UseCases.Contributors.Get;
 using Clean.Architecture.UseCases.Contributors.Update;
+using Clean.Architecture.Web.Contributors;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Clean.Architecture.Web.EndPoints.Contributors;
 
 /// <summary>
 /// Update an existing Contributor.

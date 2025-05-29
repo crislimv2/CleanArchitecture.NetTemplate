@@ -1,6 +1,7 @@
 ﻿using Clean.Architecture.UseCases.Contributors.Delete;
+using Clean.Architecture.Web.Contributors;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Clean.Architecture.Web.EndPoints.Contributors;
 
 /// <summary>
 /// Delete a Contributor.

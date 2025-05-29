@@ -1,7 +1,8 @@
 ﻿using Clean.Architecture.UseCases.Contributors;
 using Clean.Architecture.UseCases.Contributors.List;
+using Clean.Architecture.Web.Contributors;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Clean.Architecture.Web.EndPoints.Contributors;
 
 /// <summary>
 /// List all Contributors
@@ -19,7 +20,7 @@ public class List(IMediator _mediator) : EndpointWithoutRequest<ContributorListR
 
   public override async Task HandleAsync(CancellationToken cancellationToken)
   {
-    Result<IEnumerable<ContributorDTO>> result = await _mediator.Send(new ListContributorsQuery(null, null), cancellationToken);
+    var result = await _mediator.Send(new ListContributorsQuery(null, null), cancellationToken);
 
     if (result.IsSuccess)
     {

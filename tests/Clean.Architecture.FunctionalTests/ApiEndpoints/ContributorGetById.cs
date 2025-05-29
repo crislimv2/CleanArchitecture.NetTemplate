@@ -1,5 +1,6 @@
 ﻿using Clean.Architecture.Infrastructure.Data;
 using Clean.Architecture.Web.Contributors;
+using Clean.Architecture.Web.EndPoints.Contributors;
 
 
 namespace Clean.Architecture.FunctionalTests.ApiEndpoints;
